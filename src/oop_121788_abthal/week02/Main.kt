@@ -5,12 +5,12 @@ import java.util.Scanner
 fun main() {
     val scanner = Scanner(System.`in`)
 
-    println("=== INPUT DATA MAHASISWA ===")
+    println("- APLIKASI PMB UMNI -")
 
     print("Masukkan Nama: ")
     val name = scanner.nextLine()
 
-    print("Masukkan NIM (5 karakter): ")
+    print("Masukkan NIM (Wajib 5 Karakter): ")
     val nim = scanner.nextLine()
 
     // Validasi panjang NIM
@@ -22,30 +22,22 @@ fun main() {
     }
 
     // Menu pilihan jalur
-    println("\nPilih Jalur Pendaftaran:")
-    println("1. Reguler (Dengan Jurusan)")
-    println("2. Umum (Tanpa Jurusan)")
-    print("Pilihan (1/2): ")
-
+    print("Pilih Jalur (1. Reguler, 2. Umum): ")
     val type = scanner.nextInt()
     scanner.nextLine() // Consume newline
 
-    when (type) {
-        1 -> {
-            // Jalur Reguler: menggunakan primary constructor
-            print("Masukkan Jurusan: ")
-            val major = scanner.nextLine()
-            val student = Student(name, nim, major)
-            println("Terdaftar di: ${student.major} dengan GPA awal ${student.gpa}")
-        }
-        2 -> {
-            // Jalur Umum: menggunakan secondary constructor
-            val student = Student(name, nim)
-            println("Terdaftar di: ${student.major} dengan GPA awal ${student.gpa}")
-        }
-        else -> {
-            println("Pilihan tidak valid! Pendaftaran dibatalkan.")
-        }
+    if (type == 1) {
+        print("Masukkan Jurusan: ")
+        val major = scanner.nextLine()
+        // Memanggil Primary Constructor
+        val s1 = Student(name, nim, major)
+        println("Terdaftar di: ${s1.major} dengan GPA awal ${s1.gpa}")
+    } else if (type == 2) {
+        // Memanggil Secondary Constructor, jurusan otomatis "Non-Matriculated"
+        val s2 = Student(name, nim)
+        println("Terdaftar di: ${s2.major} dengan GPA awal ${s2.gpa}")
+    } else {
+        println("Pilihan ngawur, pendaftaran batal!")
     }
 
     scanner.close()
