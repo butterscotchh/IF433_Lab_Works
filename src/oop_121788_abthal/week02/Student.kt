@@ -3,7 +3,7 @@ package oop_121788_abthal.week02
 class Student(
     val name: String,
     val nim: String,
-    var major: String
+    var major: String = "Undeclared"
 ) {
 
     init {
@@ -12,10 +12,5 @@ class Student(
         } else {
             println("[LOG] Objek Student berhasil dialokasikan di memory.")
         }
-    }
-
-    // Secondary Constructor (mirip Java)
-    constructor(name: String, nim: String) : this(name, nim, "Undeclared") {
-        println("[INFO] Jurusan default digunakan: Undeclared")
     }
 }
