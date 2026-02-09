@@ -1,4 +1,4 @@
-package oop_121788_abthal.week01
+package week01
 
 fun calculateStatus(score: Int) = if (score > 75) "Lulus" else "Tidak Lulus"
 fun main() {

@@ -1,4 +1,4 @@
-package oop_121788_abthal.week01
+package week01
 
 fun main() {
     val gameTitle = "SteamKW Deluxe Edition"
