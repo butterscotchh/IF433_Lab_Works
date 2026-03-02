@@ -1,4 +1,4 @@
-package oop_121788_abthal.week04.Task1
+package oop_121788_abthal.week04
 
 class ElectricCar(brand: String, numberOfDoors: Int, val batteryCapacity: Int) : Car(brand, numberOfDoors) {
 
