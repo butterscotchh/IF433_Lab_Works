@@ -1,13 +1,17 @@
 package oop_121788_abthal.week07
 
+println("\n=== TEST SEALED CLASS ===")
+
 val response: ApiResponse = ApiResponse.Success("Data berhasil ditarik!")
 
-when(response) {
+val uiMessage = when(response) {
 
-    is ApiResponse.Success ->
-    println("Tampilkan: ${response.data}")
+    is ApiResponse.Success -> "Tampilkan: ${response.data}"
 
-    is ApiResponse.Error ->
-    println("Munculkan alert: ${response.message}")
+    is ApiResponse.Error -> "Munculkan alert: ${response.message}"
+
+    ApiResponse.Loading -> "Tampilkan Spinner"
 
 }
+
+println(uiMessage)
