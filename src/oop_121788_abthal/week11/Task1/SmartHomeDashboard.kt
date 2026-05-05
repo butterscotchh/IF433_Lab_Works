@@ -36,4 +36,9 @@ fun main() {
         println("\n--- Hasil Pencarian ---")
         println(it.diagnose()) // Memanggil extension function diagnose()
     }
+
+    with(homeDevices) {
+        println("\n--- Dashboard Summary ---")
+        println("Total Perangkat: ${this.size}") // Menggunakan 'this' sebagai context object
+    }
 }
