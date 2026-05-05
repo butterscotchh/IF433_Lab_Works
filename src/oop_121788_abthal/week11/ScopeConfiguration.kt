@@ -16,4 +16,10 @@ fun main() {
         println("Log Sebelum ditambah: $it") // 'it' refers to the list
     }.add(4) // because 'also' returns the list, we can call .add() immediately
     println("Setelah ditambah: $numbers")
+
+    println("\n=== TEST WITH ===")
+    with(user) {
+        // Access properties directly without 'user.'
+        println("User Detail -> Nama: $name, Umur: $age")
+    }
 }
