@@ -13,3 +13,12 @@ fun main() {
     }
     // (Opsional) Cek apakah sudah masuk ke list
     homeDevices.forEach { println(it.diagnose()) }
+
+    SmartDevice("Ezviz Outdoor", "Camera").apply {
+        isOnline = true
+        powerLoad = 5
+    }.also {
+        println("(LOG) Kamera terhubung")
+        homeDevices.add(it)
+    }
+}
