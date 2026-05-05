@@ -22,4 +22,10 @@ fun main() {
         // Access properties directly without 'user.'
         println("User Detail -> Nama: $name, Umur: $age")
     }
+
+    val newUser = User("Budi", 20).apply {
+        age = 21 // Changing property using 'this' context
+    }.also {
+        println("User baru berhasil dibuat: $it") // Logging using 'it' context
+    }
 }
