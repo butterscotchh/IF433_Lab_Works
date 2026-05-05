@@ -41,4 +41,9 @@ fun main() {
         println("\n--- Dashboard Summary ---")
         println("Total Perangkat: ${this.size}") // Menggunakan 'this' sebagai context object
     }
+
+    val totalPower = homeDevices.run {
+        sumOf { it.powerLoad } // Menghitung total daya dari seluruh list
+    }
+    println("Total Penggunaan Daya: $totalPower Watt")
 }
