@@ -46,4 +46,9 @@ fun main() {
         sumOf { it.powerLoad } // Menghitung total daya dari seluruh list
     }
     println("Total Penggunaan Daya: $totalPower Watt")
+
+    println("\n=== DAFTAR PERANGKAT SMART HOME ===")
+    homeDevices.forEach {
+        println(it.diagnose()) // Menggunakan extension function diagnose()
+    }
 }
