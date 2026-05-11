@@ -30,6 +30,13 @@ fun main() {
     } finally {
         println("Siklus pengecekan dispenser pagi selesai.")
 
-    println("\n-------------------------------------------\n")
+        println("\n-------------------------------------------\n")
+        println("=== JADWAL MAKAN 2: EKSEKUSI RUNCATCHING ===")
+        // Pemilik isi ulang stok jadi 1000
+        currentKibbleStock = 1000
+        runCatching {
+            dispenseKibble(30, currentKibbleStock, false)
+        }.onSuccess { newStock ->
+        }
     }
 }
