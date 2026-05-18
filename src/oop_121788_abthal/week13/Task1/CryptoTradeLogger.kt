@@ -1,5 +1,16 @@
 package oop_121788_abthal.week13.Task1
 
+import java.io.File
+import java.io.FileNotFoundException
+
+fun saveTrades(trades: List<TradeRecord>, path: String) {
+    File(path).printWriter().use { writer ->
+        trades.forEach { trade ->
+            writer.println(trade.toCsv())
+        }
+    }
+}
+
 data class TradeRecord(
     val id: Int,
     val symbol: String,
