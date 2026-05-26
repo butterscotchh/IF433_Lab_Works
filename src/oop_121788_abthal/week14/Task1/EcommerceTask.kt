@@ -1,28 +1,20 @@
 package oop_121788_abthal.week14.Task1
-
 import java.io.File
 
-// ==========================================
-// ABSTRAKSI & IMPLEMENTASI REPOSITORY (DIP)
-// ==========================================
+// --- REPOSITORY & NOTIFICATION (DARI CP 19) ---
 interface OrderRepository {
     fun saveOrder(itemName: String, finalPrice: Double, customerType: String)
 }
 
 class CsvOrderRepository : OrderRepository {
     private val file = File("orders.csv")
-
     override fun saveOrder(itemName: String, finalPrice: Double, customerType: String) {
-        // Menggunakan blok .use untuk safe resource handling (BufferedWriter otomatis di-close)
-        file.bufferedWriter().use { writer ->
+        file.bufferedWriter().use {
             file.appendText("$itemName,$finalPrice,$customerType\n")
         }
     }
 }
 
-// ==========================================
-// ABSTRAKSI & IMPLEMENTASI NOTIFIKASI (DIP)
-// ==========================================
 interface NotificationService {
     fun sendNotification(itemName: String)
 }
@@ -33,25 +25,41 @@ class EmailNotifier : NotificationService {
     }
 }
 
+
 // ==========================================
-// CLASS UTAMA YANG SUDAH FIX SRP & DIP
+// FIX OCP: STRATEGI PERHITUNGAN HARGA
+// ==========================================
+interface PricingStrategy {
+    fun calculate(price: Double): Double
+    fun getStrategyName(): String // Pendukung untuk pencatatan di CSV
+}
+
+class RegularPricing : PricingStrategy {
+    override fun calculate(price: Double): Double = price
+    override fun getStrategyName(): String = "REGULAR"
+}
+
+class VipPricing : PricingStrategy {
+    override fun calculate(price: Double): Double = price * 0.90
+    override fun getStrategyName(): String = "VIP"
+}
+
+
+// ==========================================
+// IMPLEMENTASI FINAL ORDER PROCESSOR (SOLID)
 // ==========================================
 class SafeOrderProcessor(
     private val repo: OrderRepository,
     private val notifier: NotificationService
 ) {
-    // Sementara blok 'when' masih kaku karena OCP baru akan diperbaiki di CP 20
-    fun processOrder(itemName: String, basePrice: Double, customerType: String) {
-        val finalPrice = when (customerType) {
-            "REGULAR" -> basePrice
-            "VIP" -> basePrice * 0.90
-            else -> basePrice
-        }
+    // Menerima interface PricingStrategy secara langsung, blok 'when' sukses dihapus!
+    fun processOrder(itemName: String, basePrice: Double, pricingStrategy: PricingStrategy) {
+        val finalPrice = pricingStrategy.calculate(basePrice)
+        val typeName = pricingStrategy.getStrategyName()
 
         println("Memproses pesanan $itemName seharga $finalPrice")
 
-        // Memanggil lewat interface, bukan hardcoded lagi
-        repo.saveOrder(itemName, finalPrice, customerType)
+        repo.saveOrder(itemName, finalPrice, typeName)
         notifier.sendNotification(itemName)
     }
 }
